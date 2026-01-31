@@ -5,6 +5,7 @@ public class ColorWheelController : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private ColorEventChannel _colorChannel;
+    [SerializeField] private GameCapabilityState _capabilityState; // Referencia al estado secreto
     [SerializeField] private GameObject _wheelVisuals;
 
     [Header("Configuración de Colores")]
@@ -15,15 +16,14 @@ public class ColorWheelController : MonoBehaviour
     private GameControls _controls;
     private bool _isSelecting;
 
-    private GameColor selected;   //Correction to private
-    //public static ColorWheelController Instance;
-
     private void Awake()
     {
-        //Instance = this;
+        // 1. Limpieza de memoria (Importante para evitar bugs al reiniciar)
+        if (_colorChannel != null) _colorChannel.ResetState();
+        if (_capabilityState != null) _capabilityState.ResetState();
+
         _controls = new GameControls();
-        if (_wheelVisuals == null) Debug.LogError("¡ERROR! No has asignado '_wheelVisuals' en el inspector.");
-        else _wheelVisuals.SetActive(false);
+        if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
     }
 
     private void OnEnable()
@@ -32,7 +32,6 @@ public class ColorWheelController : MonoBehaviour
         _controls.Gameplay.OpenColorWheel.started += OnClickStarted;
         _controls.Gameplay.OpenColorWheel.canceled += OnClickReleased;
         _controls.Gameplay.ResetColor.performed += OnDoubleClick;
-        Debug.Log("--- SISTEMA DE INPUT ACTIVADO Y ESCUCHANDO ---");
     }
 
     private void OnDisable()
@@ -43,34 +42,21 @@ public class ColorWheelController : MonoBehaviour
         _controls.Gameplay.Disable();
     }
 
-    
-    private void OnDoubleClick(InputAction.CallbackContext context)
-    {
-        Debug.Log(">>> DOBLE CLIC DETECTADO: Reseteando a Color Base (None) <<<");
-        _isSelecting = false;
-        if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
-        _colorChannel.RaiseColorChanged(GameColor.None);
-    }
-
-    
     private void OnClickStarted(InputAction.CallbackContext context)
     {
-        Debug.Log(">>> CLIC INICIADO: Abriendo rueda en el CENTRO <<<");
-        
         _isSelecting = true;
         
+        // Forzar aparición en el CENTRO de la pantalla
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         
         if (_wheelVisuals != null)
         {
-            
             _wheelVisuals.transform.position = screenCenter;
             _wheelVisuals.SetActive(true);
         }
-        if (Mouse.current != null)  
-        {
-            Mouse.current.WarpCursorPosition(screenCenter);
-        }
+
+        // Opcional: Llevar el mouse al centro
+        if (Mouse.current != null) Mouse.current.WarpCursorPosition(screenCenter);
     }
 
     private void OnClickReleased(InputAction.CallbackContext context)
@@ -80,34 +66,31 @@ public class ColorWheelController : MonoBehaviour
         _isSelecting = false;
         if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
 
-        selected = CalculateColorFromMouse();
+        GameColor selected = CalculateColorFromMouse();
         
         if (selected != GameColor.None)
         {
-            Debug.Log($"<color=green>COLOR CONFIRMADO: {selected}</color>");
             _colorChannel.RaiseColorChanged(selected);
         }
-        else
-        {
-            Debug.Log("<color=yellow>Zona muerta (No moviste el mouse lo suficiente desde el centro)</color>");
-        }
+    }
+
+    private void OnDoubleClick(InputAction.CallbackContext context)
+    {
+        _isSelecting = false;
+        if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
+        _colorChannel.RaiseColorChanged(GameColor.None); // Volver a gris
     }
 
     private GameColor CalculateColorFromMouse()
     {
         Vector2 mousePos = _controls.Gameplay.MousePosition.ReadValue<Vector2>();
-        Vector2 center = _wheelVisuals.transform.position; // El centro ahora es fijo
+        Vector2 center = _wheelVisuals.transform.position;
         Vector2 direction = mousePos - center;
 
-        // Debug visual de la distancia
-        Debug.Log($"Distancia del centro: {direction.magnitude} píxeles");
-
-        if (direction.magnitude < 20f) return GameColor.None; // Aumenté un poco el margen a 20px
+        if (direction.magnitude < 20f) return GameColor.None;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360;
-
-        Debug.Log($"Ángulo: {angle:F2}°");
 
         if (angle >= 45 && angle < 135) return _colorTop;
         if (angle >= 135 && angle < 225) return _colorLeft;

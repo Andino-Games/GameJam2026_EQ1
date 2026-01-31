@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class ColorReactiveObject : MonoBehaviour
 {
-    [Header("Arquitectura")]
     [SerializeField] private ColorEventChannel _colorChannel;
-
-    [Header("Configuración")]
     [SerializeField] private GameColor _objectColor;
 
     private Collider2D _collider;
@@ -33,30 +30,18 @@ public class ColorReactiveObject : MonoBehaviour
 
     private void HandleColorChanged(GameColor newWorldColor)
     {
-        
-        
-        // 1. Si el mundo está en estado "Base" (None), TODO debe ser visible/sólido.
-        // Esto arregla que las cosas desaparezcan al inicio.
-        if (newWorldColor == GameColor.None)
+        // Regla: Si el mundo es gris (None) o el objeto es gris, SIEMPRE visible.
+        if (newWorldColor == GameColor.None || _objectColor == GameColor.None)
         {
             SetPhysical(true);
             return;
         }
 
-        // 2. Si este objeto es "Neutro" (None), nunca debe verse afectado por colores.
-        // Siempre será sólido (como una pared normal).
-        if (_objectColor == GameColor.None)
-        {
-            SetPhysical(true);
-            return;
-        }
-
-        // 3. Lógica Normal: Solo desaparece si los colores coinciden explícitamente.
+        // Si los colores coinciden, desaparece. Si no, aparece.
         bool shouldBePhysical = (newWorldColor != _objectColor);
         SetPhysical(shouldBePhysical);
     }
 
-    // Función auxiliar para no repetir código
     private void SetPhysical(bool isPhysical)
     {
         if (_collider != null) _collider.enabled = isPhysical;
