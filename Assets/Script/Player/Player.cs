@@ -15,9 +15,14 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Transform _groundCheckPoint;
     [SerializeField] private float _groundCheckRadius = 0.2f;
-    private bool isGrounded;
+    private bool isGrounded, _isMiniPress = false;
 
-    
+    [Header("References")]
+    [SerializeField] private GameObject _MiniPlayer;
+
+
+
+
 
     private void Awake()
     {
@@ -34,6 +39,11 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
+        if(controls.Player.PowerUp.triggered)
+        {
+            _isMiniPress = !_isMiniPress;
+            LittlePlayer(_isMiniPress);
+        }
 
         
     }
@@ -47,6 +57,14 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    private void LittlePlayer(bool _isPress)
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = !_isPress;
+        gameObject.GetComponent<Collider2D>().enabled = !_isPress;
+        _MiniPlayer.GetComponent<SpriteRenderer>().enabled = _isPress;
+        _MiniPlayer.GetComponent<Collider2D>().enabled = _isPress;
+    }
     private void OnDrawGizmos()
     {
         if (_groundCheckPoint != null)
@@ -55,6 +73,8 @@ public class Player : MonoBehaviour
             Gizmos.DrawWireSphere(_groundCheckPoint.position, _groundCheckRadius);
         }
     }
+
+
 
     private void OnEnable() => controls.Player.Enable();
     private void OnDisable() => controls.Player.Disable();

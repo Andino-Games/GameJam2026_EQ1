@@ -16,13 +16,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "PowerUps",
+                    "name": "PowerUp",
                     "type": "Button",
-                    "id": "98057397-ffe0-438e-af5a-a67d88dc4ca8",
+                    "id": "4dfded09-7f9a-4f07-9c15-e5670d5690c3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -72,12 +72,12 @@
                 },
                 {
                     "name": "",
-                    "id": "16d6eda4-62e2-4988-abfa-e303a2b6d7c5",
+                    "id": "027bb8b3-6b7b-462e-9c42-04069cb17845",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PowerUps",
+                    "action": "PowerUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
