@@ -1,23 +1,20 @@
 using Script.PowerUps.SecretKey;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Script.UI
 {
     public class ColorWheelController : MonoBehaviour
     {
-        [FormerlySerializedAs("_colorChannel")]
         [Header("Referencias")]
         [SerializeField] private ColorEventChannel colorChannel;
-        [FormerlySerializedAs("_capabilityState")] [SerializeField] private GameCapabilityState capabilityState; // Referencia al estado secreto
-        [FormerlySerializedAs("_wheelVisuals")] [SerializeField] private GameObject wheelVisuals;
+        [SerializeField] private GameCapabilityState capabilityState; // Referencia al estado secreto
+        [SerializeField] private GameObject wheelVisuals;
 
-        [FormerlySerializedAs("_colorTop")]
         [Header("Configuración de Colores")]
         [SerializeField] private GameColor colorTop;
-        [FormerlySerializedAs("_colorRight")] [SerializeField] private GameColor colorRight;
-        [FormerlySerializedAs("_colorLeft")] [SerializeField] private GameColor colorLeft;
+        [SerializeField] private GameColor colorRight;
+        [SerializeField] private GameColor colorLeft;
 
         private GameControls _controls;
         private bool _isSelecting;

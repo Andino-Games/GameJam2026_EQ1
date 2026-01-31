@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Script.Player
 {
-    public class PowerBolcks : MonoBehaviour
+    public class PowerBlocks : MonoBehaviour
     {
         [SerializeField] private Transform block;
 

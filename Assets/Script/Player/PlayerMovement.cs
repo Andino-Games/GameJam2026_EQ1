@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Script.Player
 {
@@ -11,13 +10,13 @@ namespace Script.Player
 
         [Header("Player Configuration")] 
         private Rigidbody2D _rb;
-        [FormerlySerializedAs("_speed")] [SerializeField] private float speed;
-        [FormerlySerializedAs("_jumpForce")] [SerializeField] private float jumpForce;
-        [FormerlySerializedAs("_acceleraton")] [SerializeField] private float acceleraton = 10f;
-        [FormerlySerializedAs("_decelerator")] [SerializeField] private float decelerator = 10f;
-        [FormerlySerializedAs("_groundLayer")] [SerializeField] private LayerMask groundLayer;
-        [FormerlySerializedAs("_groundCheckPoint")] [SerializeField] private Transform groundCheckPoint;
-        [FormerlySerializedAs("_groundCheckRadius")] [SerializeField] private float groundCheckRadius = 0.2f;
+        [SerializeField] private float speed;
+        [SerializeField] private float jumpForce;
+        [SerializeField] private float acceleraton = 10f;
+        [SerializeField] private float decelerator = 10f;
+        [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private Transform groundCheckPoint;
+        [SerializeField] private float groundCheckRadius = 0.2f;
         private bool _isGrounded;
 
         private void Awake()

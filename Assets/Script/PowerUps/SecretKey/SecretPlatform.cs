@@ -1,14 +1,13 @@
 using Script.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Script.PowerUps.SecretKey
 {
     public class SecretPlatform : MonoBehaviour
     {
-        [FormerlySerializedAs("_colorChannel")] [SerializeField] private ColorEventChannel colorChannel;
-        [FormerlySerializedAs("_capabilityState")] [SerializeField] private GameCapabilityState capabilityState;
-        [FormerlySerializedAs("_revealColor")] [SerializeField] private GameColor revealColor = GameColor.ColorC;
+        [SerializeField] private ColorEventChannel colorChannel;
+        [SerializeField] private GameCapabilityState capabilityState;
+        [SerializeField] private GameColor revealColor = GameColor.ColorC;
 
         private Collider2D _collider;
         private Renderer _renderer;

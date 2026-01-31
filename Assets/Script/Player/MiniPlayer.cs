@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Script.Player
 {
@@ -8,8 +7,8 @@ namespace Script.Player
         private PlayerControls _controls;
 
         private SpriteRenderer _player;
-        [FormerlySerializedAs("_MiniplayerSp")] [SerializeField] private SpriteRenderer miniplayerSp;
-        [FormerlySerializedAs("_MiniplayerCol")] [SerializeField] private Collider2D miniplayerCol;
+        [SerializeField] private SpriteRenderer miniplayerSp;
+        [SerializeField] private Collider2D miniplayerCol;
         private Collider2D _playerCol;
 
         bool _isMiniPress;

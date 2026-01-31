@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Script.UI
 {
     public class ColorReactiveObject : MonoBehaviour
     {
-        [FormerlySerializedAs("_colorChannel")] [SerializeField] private ColorEventChannel colorChannel;
-        [FormerlySerializedAs("_objectColor")] [SerializeField] private GameColor objectColor;
+        [SerializeField] private ColorEventChannel colorChannel;
+        [SerializeField] private GameColor objectColor;
 
         private Collider2D _collider;
         private Renderer _renderer;
