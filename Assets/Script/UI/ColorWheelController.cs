@@ -15,12 +15,12 @@ public class ColorWheelController : MonoBehaviour
     private GameControls _controls;
     private bool _isSelecting;
 
-    public GameColor selected;
-    public static ColorWheelController Instance;
+    private GameColor selected;   //Correction to private
+    //public static ColorWheelController Instance;
 
     private void Awake()
     {
-        Instance = this;
+        //Instance = this;
         _controls = new GameControls();
         if (_wheelVisuals == null) Debug.LogError("¡ERROR! No has asignado '_wheelVisuals' en el inspector.");
         else _wheelVisuals.SetActive(false);
