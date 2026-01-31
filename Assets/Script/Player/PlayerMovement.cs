@@ -11,17 +11,11 @@ public class Player : MonoBehaviour
 
     [Header("Player Configuration")]
     Rigidbody2D rb;
-    [SerializeField] private float _speed, _jumpForce;
+    [SerializeField] private float _speed, _jumpForce, _acceleraton = 10f, _decelerator = 10f;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Transform _groundCheckPoint;
     [SerializeField] private float _groundCheckRadius = 0.2f;
-    private bool isGrounded, _isMiniPress = false;
-
-    [Header("References")]
-    [SerializeField] private GameObject _MiniPlayer;
-
-
-
+    private bool isGrounded;
 
 
     private void Awake()
@@ -30,22 +24,24 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
     }
-    private void Update()
+ 
+
+    private void FixedUpdate()
     {
         moveInput = controls.Player.Move.ReadValue<Vector2>();
-        rb.linearVelocity = new Vector2(moveInput.x * _speed, rb.linearVelocity.y);
 
-        if(moveInput.y > 0.5f)
+        float targetSpeed = moveInput.x * _speed;
+        float learp = (Mathf.Abs(targetSpeed) > 0.01f) ? _acceleraton : _decelerator;
+
+        float newVelocity = Mathf.Lerp(rb.linearVelocity.x, targetSpeed, learp * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector2(newVelocity, rb.linearVelocity.y);
+
+        //Jump--------------------------------------------------------------------------------------
+        if (moveInput.y > 0.5f)
         {
             Jump();
         }
-        if(controls.Player.PowerUp.triggered)
-        {
-            _isMiniPress = !_isMiniPress;
-            LittlePlayer(_isMiniPress);
-        }
 
-        
     }
 
     private void Jump()
@@ -53,18 +49,12 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(_groundCheckPoint.position, _groundCheckRadius, _groundLayer);
         if (isGrounded)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, _jumpForce);
+            rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
 
     }
 
-    private void LittlePlayer(bool _isPress)
-    {
-        gameObject.GetComponent<SpriteRenderer>().enabled = !_isPress;
-        gameObject.GetComponent<Collider2D>().enabled = !_isPress;
-        _MiniPlayer.GetComponent<SpriteRenderer>().enabled = _isPress;
-        _MiniPlayer.GetComponent<Collider2D>().enabled = _isPress;
-    }
+   
     private void OnDrawGizmos()
     {
         if (_groundCheckPoint != null)

@@ -132,7 +132,8 @@ GameObject:
   - component: {fileID: 46589756}
   - component: {fileID: 46589755}
   - component: {fileID: 46589759}
-  - component: {fileID: 46589760}
+  - component: {fileID: 46589761}
+  - component: {fileID: 46589762}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -152,10 +153,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -293,14 +294,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   _speed: 5
-  _jumpForce: 8
+  _jumpForce: 500
+  _acceleraton: 10
+  _decelerator: 5
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
   _groundCheckPoint: {fileID: 1744456960}
   _groundCheckRadius: 0.2
-  _MiniPlayer: {fileID: 463373623}
---- !u!114 &46589760
+--- !u!114 &46589761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46589754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ff3ec3f7296e84d8141193bd949529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MiniPlayer
+  _MiniplayerSp: {fileID: 463373625}
+  _MiniplayerCol: {fileID: 463373626}
+--- !u!114 &46589762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 7c437cb3a06b64b43bee8144bc28bf16, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 63a9c10d5aa300f41bf0f7b9e29e664b, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -327,7 +343,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &357344035
