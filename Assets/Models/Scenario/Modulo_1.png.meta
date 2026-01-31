@@ -116,12 +116,12 @@ TextureImporter:
       name: Modulo_1_0
       rect:
         serializedVersion: 2
-        x: 805
-        y: 817
-        width: 1290
-        height: 1529
+        x: 806
+        y: 806
+        width: 1273
+        height: 1271
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -134,11 +134,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Modulo_1_1
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 2085
+        width: 1273
+        height: 287
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e12119cc4836844d83953d927fef342
+      internalID: 256303631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b4978c45e5a7c524c8bc7b7818075aac
     internalID: 0
     vertices: []
     indices: 
@@ -149,6 +171,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Modulo_1_0: 171403831517738032
+      Modulo_1_1: 256303631
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
