@@ -1,29 +1,32 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
-[CreateAssetMenu(menuName = "Game Architecture/Capability State")]
-public class GameCapabilityState : ScriptableObject
+namespace Script.PowerUps.SecretKey
 {
-    // ¿El jugador ya tiene la mascara?
-    public bool HasSecretKey { get; private set; }
-
-    // Evento para avisar que acabamos de conseguir la llave
-    public event Action OnKeyAcquired;
-
-    // Método para resetear al iniciar el juego (importante para testing)
-    public void ResetState()
+    [CreateAssetMenu(menuName = "Game Architecture/Capability State")]
+    public class GameCapabilityState : ScriptableObject
     {
-        HasSecretKey = false;
-    }
+        // ¿El jugador ya tiene la mascara?
+        public bool HasSecretKey { get; private set; }
 
-    // Método que llama la llave al ser recogida
-    public void UnlockSecret()
-    {
-        if (!HasSecretKey)
+        // Evento para avisar que acabamos de conseguir la llave
+        public event Action OnKeyAcquired;
+
+        // Método para resetear al iniciar el juego (importante para testing)
+        public void ResetState()
         {
-            HasSecretKey = true;
-            OnKeyAcquired?.Invoke();
-            Debug.Log("¡Poder desbloqueado! Estado guardado.");
+            HasSecretKey = false;
+        }
+
+        // Método que llama la llave al ser recogida
+        public void UnlockSecret()
+        {
+            if (!HasSecretKey)
+            {
+                HasSecretKey = true;
+                OnKeyAcquired?.Invoke();
+                Debug.Log("¡Poder desbloqueado! Estado guardado.");
+            }
         }
     }
 }

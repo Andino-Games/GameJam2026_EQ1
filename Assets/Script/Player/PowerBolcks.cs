@@ -1,21 +1,19 @@
 using UnityEngine;
 
-public class PowerBolcks : MonoBehaviour
+namespace Script.Player
 {
-    [SerializeField] Transform block;
-    void Start()
+    public class PowerBolcks : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private Transform block;
 
-    // Update is called once per frame
-    void Update()
-    {
-        foreach(Transform blocks in block)
+        void Update()
         {
-            if(!block.gameObject.activeInHierarchy)
+            foreach(Transform blocks in block)
             {
-                blocks.gameObject.SetActive(true);
+                if(!block.gameObject.activeInHierarchy)
+                {
+                    blocks.gameObject.SetActive(true);
+                }
             }
         }
     }

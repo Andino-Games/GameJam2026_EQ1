@@ -1,74 +1,67 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
-
-public class Player : MonoBehaviour
+namespace Script.Player
 {
-    private PlayerControls controls;
-    private Vector2 moveInput;
+    public class Player : MonoBehaviour
+    {
+        private PlayerControls _controls;
+        private Vector2 _moveInput;
     
 
-    [Header("Player Configuration")]
-    Rigidbody2D rb;
-    [SerializeField] private float _speed, _jumpForce, _acceleraton = 10f, _decelerator = 10f;
-    [SerializeField] private LayerMask _groundLayer;
-    [SerializeField] private Transform _groundCheckPoint;
-    [SerializeField] private float _groundCheckRadius = 0.2f;
-    private bool isGrounded;
+        [Header("Player Configuration")] 
+        private Rigidbody2D _rb;
+        [FormerlySerializedAs("_speed")] [SerializeField] private float speed;
+        [FormerlySerializedAs("_jumpForce")] [SerializeField] private float jumpForce;
+        [FormerlySerializedAs("_acceleraton")] [SerializeField] private float acceleraton = 10f;
+        [FormerlySerializedAs("_decelerator")] [SerializeField] private float decelerator = 10f;
+        [FormerlySerializedAs("_groundLayer")] [SerializeField] private LayerMask groundLayer;
+        [FormerlySerializedAs("_groundCheckPoint")] [SerializeField] private Transform groundCheckPoint;
+        [FormerlySerializedAs("_groundCheckRadius")] [SerializeField] private float groundCheckRadius = 0.2f;
+        private bool _isGrounded;
 
-
-    private void Awake()
-    {
-        controls = new PlayerControls();
-        rb = GetComponent<Rigidbody2D>();
-
-    }
- 
-
-    private void FixedUpdate()
-    {
-        moveInput = controls.Player.Move.ReadValue<Vector2>();
-
-        float targetSpeed = moveInput.x * _speed;
-        float learp = (Mathf.Abs(targetSpeed) > 0.01f) ? _acceleraton : _decelerator;
-
-        float newVelocity = Mathf.Lerp(rb.linearVelocity.x, targetSpeed, learp * Time.fixedDeltaTime);
-        rb.linearVelocity = new Vector2(newVelocity, rb.linearVelocity.y);
-
-        //Jump--------------------------------------------------------------------------------------
-        if (moveInput.y > 0.5f)
+        private void Awake()
         {
-            Jump();
+            _controls = new PlayerControls();
+            _rb = GetComponent<Rigidbody2D>();
         }
 
-    }
-
-    private void Jump()
-    {
-        isGrounded = Physics2D.OverlapCircle(_groundCheckPoint.position, _groundCheckRadius, _groundLayer);
-        if (isGrounded)
+        private void FixedUpdate()
         {
-            rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            _moveInput = _controls.Player.Move.ReadValue<Vector2>();
+
+            float targetSpeed = _moveInput.x * speed;
+            float learp = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleraton : decelerator;
+
+            float newVelocity = Mathf.Lerp(_rb.linearVelocity.x, targetSpeed, learp * Time.fixedDeltaTime);
+            _rb.linearVelocity = new Vector2(newVelocity, _rb.linearVelocity.y);
+
+            if (_moveInput.y > 0.5f)
+            {
+                Jump();
+            }
         }
 
-    }
+        private void Jump()
+        {
+            _isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
+            if (_isGrounded)
+            {
+                _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+        }
 
    
-    private void OnDrawGizmos()
-    {
-        if (_groundCheckPoint != null)
+        private void OnDrawGizmos()
         {
+            if (!groundCheckPoint) return;
+            
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(_groundCheckPoint.position, _groundCheckRadius);
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
         }
+
+        private void OnEnable() => _controls.Player.Enable();
+
+        private void OnDisable() => _controls.Player.Disable();
     }
-
-
-
-    private void OnEnable() => controls.Player.Enable();
-    private void OnDisable() => controls.Player.Disable();
-
-    
-    
 }

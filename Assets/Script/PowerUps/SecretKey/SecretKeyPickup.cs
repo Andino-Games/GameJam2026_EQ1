@@ -1,14 +1,17 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class SecretKeyPickup : MonoBehaviour
+namespace Script.PowerUps.SecretKey
 {
-    [SerializeField] private GameCapabilityState _capabilityState;
-
-    private void OnTriggerEnter2D(Collider2D other)
+    public class SecretKeyPickup : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        [FormerlySerializedAs("_capabilityState")] [SerializeField] private GameCapabilityState capabilityState;
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            _capabilityState.UnlockSecret();
+            if (!other.CompareTag("Player")) return;
+            
+            capabilityState.UnlockSecret();
             Destroy(gameObject);
         }
     }

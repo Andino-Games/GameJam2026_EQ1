@@ -1,99 +1,109 @@
+using Script.PowerUps.SecretKey;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
-public class ColorWheelController : MonoBehaviour
+namespace Script.UI
 {
-    [Header("Referencias")]
-    [SerializeField] private ColorEventChannel _colorChannel;
-    [SerializeField] private GameCapabilityState _capabilityState; // Referencia al estado secreto
-    [SerializeField] private GameObject _wheelVisuals;
-
-    [Header("Configuración de Colores")]
-    [SerializeField] private GameColor _colorTop;
-    [SerializeField] private GameColor _colorRight;
-    [SerializeField] private GameColor _colorLeft;
-
-    private GameControls _controls;
-    private bool _isSelecting;
-
-    private void Awake()
+    public class ColorWheelController : MonoBehaviour
     {
-        // 1. Limpieza de memoria (Importante para evitar bugs al reiniciar)
-        if (_colorChannel != null) _colorChannel.ResetState();
-        if (_capabilityState != null) _capabilityState.ResetState();
+        [FormerlySerializedAs("_colorChannel")]
+        [Header("Referencias")]
+        [SerializeField] private ColorEventChannel colorChannel;
+        [FormerlySerializedAs("_capabilityState")] [SerializeField] private GameCapabilityState capabilityState; // Referencia al estado secreto
+        [FormerlySerializedAs("_wheelVisuals")] [SerializeField] private GameObject wheelVisuals;
 
-        _controls = new GameControls();
-        if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
-    }
+        [FormerlySerializedAs("_colorTop")]
+        [Header("Configuración de Colores")]
+        [SerializeField] private GameColor colorTop;
+        [FormerlySerializedAs("_colorRight")] [SerializeField] private GameColor colorRight;
+        [FormerlySerializedAs("_colorLeft")] [SerializeField] private GameColor colorLeft;
 
-    private void OnEnable()
-    {
-        _controls.Gameplay.Enable();
-        _controls.Gameplay.OpenColorWheel.started += OnClickStarted;
-        _controls.Gameplay.OpenColorWheel.canceled += OnClickReleased;
-        _controls.Gameplay.ResetColor.performed += OnDoubleClick;
-    }
+        private GameControls _controls;
+        private bool _isSelecting;
 
-    private void OnDisable()
-    {
-        _controls.Gameplay.OpenColorWheel.started -= OnClickStarted;
-        _controls.Gameplay.OpenColorWheel.canceled -= OnClickReleased;
-        _controls.Gameplay.ResetColor.performed -= OnDoubleClick;
-        _controls.Gameplay.Disable();
-    }
-
-    private void OnClickStarted(InputAction.CallbackContext context)
-    {
-        _isSelecting = true;
-        
-        // Forzar aparición en el CENTRO de la pantalla
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        
-        if (_wheelVisuals != null)
+        private void Awake()
         {
-            _wheelVisuals.transform.position = screenCenter;
-            _wheelVisuals.SetActive(true);
+            // 1. Limpieza de memoria (Importante para evitar bugs al reiniciar)
+            if (colorChannel) colorChannel.ResetState();
+            if (capabilityState) capabilityState.ResetState();
+
+            _controls = new GameControls();
+            if (wheelVisuals) wheelVisuals.SetActive(false);
         }
 
-        // Opcional: Llevar el mouse al centro
-        if (Mouse.current != null) Mouse.current.WarpCursorPosition(screenCenter);
-    }
-
-    private void OnClickReleased(InputAction.CallbackContext context)
-    {
-        if (!_isSelecting) return;
-
-        _isSelecting = false;
-        if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
-
-        GameColor selected = CalculateColorFromMouse();
-        
-        if (selected != GameColor.None)
+        private void OnEnable()
         {
-            _colorChannel.RaiseColorChanged(selected);
+            _controls.Gameplay.Enable();
+            _controls.Gameplay.OpenColorWheel.started += OnClickStarted;
+            _controls.Gameplay.OpenColorWheel.canceled += OnClickReleased;
+            _controls.Gameplay.ResetColor.performed += OnDoubleClick;
         }
-    }
 
-    private void OnDoubleClick(InputAction.CallbackContext context)
-    {
-        _isSelecting = false;
-        if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
-        _colorChannel.RaiseColorChanged(GameColor.None); // Volver a gris
-    }
+        private void OnDisable()
+        {
+            _controls.Gameplay.OpenColorWheel.started -= OnClickStarted;
+            _controls.Gameplay.OpenColorWheel.canceled -= OnClickReleased;
+            _controls.Gameplay.ResetColor.performed -= OnDoubleClick;
+            _controls.Gameplay.Disable();
+        }
 
-    private GameColor CalculateColorFromMouse()
-    {
-        Vector2 mousePos = _controls.Gameplay.MousePosition.ReadValue<Vector2>();
-        Vector2 center = _wheelVisuals.transform.position;
-        Vector2 direction = mousePos - center;
+        private void OnClickStarted(InputAction.CallbackContext context)
+        {
+            _isSelecting = true;
+        
+            // Forzar aparición en el CENTRO de la pantalla
+            Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        
+            if (wheelVisuals)
+            {
+                wheelVisuals.transform.position = screenCenter;
+                wheelVisuals.SetActive(true);
+            }
 
-        if (direction.magnitude < 20f) return GameColor.None;
+            // Opcional: Llevar el mouse al centro
+            if (Mouse.current != null) Mouse.current.WarpCursorPosition(screenCenter);
+        }
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360;
+        private void OnClickReleased(InputAction.CallbackContext context)
+        {
+            if (!_isSelecting) return;
 
-        if (angle >= 45 && angle < 135) return _colorTop;
-        if (angle >= 135 && angle < 225) return _colorLeft;
-        else return _colorRight;
+            _isSelecting = false;
+            if (wheelVisuals) wheelVisuals.SetActive(false);
+
+            GameColor selected = CalculateColorFromMouse();
+        
+            if (selected != GameColor.None)
+            {
+                colorChannel.RaiseColorChanged(selected);
+            }
+        }
+
+        private void OnDoubleClick(InputAction.CallbackContext context)
+        {
+            _isSelecting = false;
+            if (wheelVisuals) wheelVisuals.SetActive(false);
+            colorChannel.RaiseColorChanged(GameColor.None); // Volver a gris
+        }
+
+        private GameColor CalculateColorFromMouse()
+        {
+            Vector2 mousePos = _controls.Gameplay.MousePosition.ReadValue<Vector2>();
+            Vector2 center = wheelVisuals.transform.position;
+            Vector2 direction = mousePos - center;
+
+            if (direction.magnitude < 20f) return GameColor.None;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            if (angle < 0) angle += 360;
+
+            return angle switch
+            {
+                >= 45 and < 135 => colorTop,
+                >= 135 and < 225 => colorLeft,
+                _ => colorRight
+            };
+        }
     }
 }

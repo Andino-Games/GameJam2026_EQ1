@@ -1,50 +1,54 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class ColorReactiveObject : MonoBehaviour
+namespace Script.UI
 {
-    [SerializeField] private ColorEventChannel _colorChannel;
-    [SerializeField] private GameColor _objectColor;
-
-    private Collider2D _collider;
-    private Renderer _renderer;
-
-    private void Awake()
+    public class ColorReactiveObject : MonoBehaviour
     {
-        _collider = GetComponent<Collider2D>();
-        _renderer = GetComponent<Renderer>();
-    }
+        [FormerlySerializedAs("_colorChannel")] [SerializeField] private ColorEventChannel colorChannel;
+        [FormerlySerializedAs("_objectColor")] [SerializeField] private GameColor objectColor;
 
-    private void OnEnable()
-    {
-        if (_colorChannel != null)
+        private Collider2D _collider;
+        private Renderer _renderer;
+
+        private void Awake()
         {
-            _colorChannel.OnColorChanged += HandleColorChanged;
-            HandleColorChanged(_colorChannel.CurrentColor);
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (_colorChannel != null) _colorChannel.OnColorChanged -= HandleColorChanged;
-    }
-
-    private void HandleColorChanged(GameColor newWorldColor)
-    {
-        // Regla: Si el mundo es gris (None) o el objeto es gris, SIEMPRE visible.
-        if (newWorldColor == GameColor.None || _objectColor == GameColor.None)
-        {
-            SetPhysical(true);
-            return;
+            _collider = GetComponent<Collider2D>();
+            _renderer = GetComponent<Renderer>();
         }
 
-        // Si los colores coinciden, desaparece. Si no, aparece.
-        bool shouldBePhysical = (newWorldColor != _objectColor);
-        SetPhysical(shouldBePhysical);
-    }
+        private void OnEnable()
+        {
+            if (colorChannel != null)
+            {
+                colorChannel.OnColorChanged += HandleColorChanged;
+                HandleColorChanged(colorChannel.CurrentColor);
+            }
+        }
 
-    private void SetPhysical(bool isPhysical)
-    {
-        if (_collider != null) _collider.enabled = isPhysical;
-        if (_renderer != null) _renderer.enabled = isPhysical;
+        private void OnDisable()
+        {
+            if (colorChannel != null) colorChannel.OnColorChanged -= HandleColorChanged;
+        }
+
+        private void HandleColorChanged(GameColor newWorldColor)
+        {
+            // Regla: Si el mundo es gris (None) o el objeto es gris, SIEMPRE visible.
+            if (newWorldColor == GameColor.None || objectColor == GameColor.None)
+            {
+                SetPhysical(true);
+                return;
+            }
+
+            // Si los colores coinciden, desaparece. Si no, aparece.
+            bool shouldBePhysical = (newWorldColor != objectColor);
+            SetPhysical(shouldBePhysical);
+        }
+
+        private void SetPhysical(bool isPhysical)
+        {
+            if (_collider != null) _collider.enabled = isPhysical;
+            if (_renderer != null) _renderer.enabled = isPhysical;
+        }
     }
 }
