@@ -14,6 +14,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PowerUps",
+                    "type": "Button",
+                    "id": "98057397-ffe0-438e-af5a-a67d88dc4ca8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -60,6 +69,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "16d6eda4-62e2-4988-abfa-e303a2b6d7c5",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUps",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
