@@ -109,6 +109,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ResetColor"",
+                    ""type"": ""Button"",
+                    ""id"": ""982e16e3-0560-4ca1-a7e7-4489ecb5ee17"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -144,6 +153,28 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bc69aa3-5ff5-4905-ba28-38bcba1fcc48"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetColor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02fb4598-a3a2-42a8-9671-f04d56db4013"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""MultiTap(tapDelay=0.5)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetColor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -154,6 +185,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_OpenColorWheel = m_Gameplay.FindAction("OpenColorWheel", throwIfNotFound: true);
         m_Gameplay_MousePosition = m_Gameplay.FindAction("MousePosition", throwIfNotFound: true);
+        m_Gameplay_ResetColor = m_Gameplay.FindAction("ResetColor", throwIfNotFound: true);
     }
 
     ~@GameControls()
@@ -236,6 +268,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_OpenColorWheel;
     private readonly InputAction m_Gameplay_MousePosition;
+    private readonly InputAction m_Gameplay_ResetColor;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -255,6 +288,10 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/MousePosition".
         /// </summary>
         public InputAction @MousePosition => m_Wrapper.m_Gameplay_MousePosition;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/ResetColor".
+        /// </summary>
+        public InputAction @ResetColor => m_Wrapper.m_Gameplay_ResetColor;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -287,6 +324,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @ResetColor.started += instance.OnResetColor;
+            @ResetColor.performed += instance.OnResetColor;
+            @ResetColor.canceled += instance.OnResetColor;
         }
 
         /// <summary>
@@ -304,6 +344,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @ResetColor.started -= instance.OnResetColor;
+            @ResetColor.performed -= instance.OnResetColor;
+            @ResetColor.canceled -= instance.OnResetColor;
         }
 
         /// <summary>
@@ -358,5 +401,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMousePosition(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ResetColor" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnResetColor(InputAction.CallbackContext context);
     }
 }

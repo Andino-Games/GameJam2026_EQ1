@@ -18,8 +18,6 @@ public class ColorWheelController : MonoBehaviour
     private void Awake()
     {
         _controls = new GameControls();
-        
-        // Verificación de seguridad
         if (_wheelVisuals == null) Debug.LogError("¡ERROR! No has asignado '_wheelVisuals' en el inspector.");
         else _wheelVisuals.SetActive(false);
     }
@@ -27,47 +25,51 @@ public class ColorWheelController : MonoBehaviour
     private void OnEnable()
     {
         _controls.Gameplay.Enable();
-        // Suscripción
         _controls.Gameplay.OpenColorWheel.started += OnClickStarted;
         _controls.Gameplay.OpenColorWheel.canceled += OnClickReleased;
-        Debug.Log("Sistema de Input Activado y Escuchando...");
+        _controls.Gameplay.ResetColor.performed += OnDoubleClick;
+        Debug.Log("--- SISTEMA DE INPUT ACTIVADO Y ESCUCHANDO ---");
     }
 
     private void OnDisable()
     {
         _controls.Gameplay.OpenColorWheel.started -= OnClickStarted;
         _controls.Gameplay.OpenColorWheel.canceled -= OnClickReleased;
+        _controls.Gameplay.ResetColor.performed -= OnDoubleClick;
         _controls.Gameplay.Disable();
     }
 
-    private void Update()
+    // ELIMINAMOS EL UPDATE QUE MOVÍA LA RUEDA
+    // private void Update() { ... } 
+
+    // --- LÓGICA DE DOBLE CLIC (RESET) ---
+    private void OnDoubleClick(InputAction.CallbackContext context)
     {
-        if (_isSelecting)
-        {
-            // Opcional: Para ver en tiempo real coordenadas del mouse
-            // Vector2 mousePos = _controls.Gameplay.MousePosition.ReadValue<Vector2>();
-            // Debug.Log($"Mouse en: {mousePos}"); 
-        }
+        Debug.Log(">>> DOBLE CLIC DETECTADO: Reseteando a Color Base (None) <<<");
+        _isSelecting = false;
+        if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
+        _colorChannel.RaiseColorChanged(GameColor.None);
     }
 
+    // --- LÓGICA DE CLIC NORMAL (SELECCIÓN) ---
     private void OnClickStarted(InputAction.CallbackContext context)
     {
-        Debug.Log(">>> CLIC DETECTADO: Iniciando selección <<<"); // ESTO DEBE SALIR AL CLICAR
-        
         _isSelecting = true;
         Vector2 mousePos = _controls.Gameplay.MousePosition.ReadValue<Vector2>();
         
         if (_wheelVisuals != null)
         {
+            // Solo movemos la rueda AL INICIO del clic. Luego se queda quieta.
             _wheelVisuals.transform.position = mousePos;
             _wheelVisuals.SetActive(true);
         }
+        Debug.Log(">>> CLIC INICIADO: Rueda fijada en posición " + mousePos + " <<<");
     }
 
     private void OnClickReleased(InputAction.CallbackContext context)
     {
-        Debug.Log(">>> CLIC SOLTADO: Finalizando selección <<<");
-        
+        if (!_isSelecting) return;
+
         _isSelecting = false;
         if (_wheelVisuals != null) _wheelVisuals.SetActive(false);
 
@@ -75,27 +77,30 @@ public class ColorWheelController : MonoBehaviour
         
         if (selected != GameColor.None)
         {
-            Debug.Log($"Color Enviado al Evento: {selected}");
+            Debug.Log($"<color=green>COLOR CONFIRMADO: {selected}</color>");
             _colorChannel.RaiseColorChanged(selected);
         }
         else
         {
-            Debug.Log("Ningún color seleccionado (Zona muerta o centro)");
+            Debug.Log("<color=yellow>Zona muerta (No moviste el mouse lo suficiente desde el centro)</color>");
         }
     }
 
     private GameColor CalculateColorFromMouse()
     {
         Vector2 mousePos = _controls.Gameplay.MousePosition.ReadValue<Vector2>();
-        Vector2 center = _wheelVisuals.transform.position;
+        Vector2 center = _wheelVisuals.transform.position; // El centro ahora es fijo
         Vector2 direction = mousePos - center;
 
-        if (direction.magnitude < 10f) return GameColor.None;
+        // Debug visual de la distancia
+        Debug.Log($"Distancia del centro: {direction.magnitude} píxeles");
+
+        if (direction.magnitude < 20f) return GameColor.None; // Aumenté un poco el margen a 20px
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360;
 
-        Debug.Log($"Ángulo calculado: {angle}"); // DEBUG DEL ÁNGULO
+        Debug.Log($"Ángulo: {angle:F2}°");
 
         if (angle >= 45 && angle < 135) return _colorTop;
         if (angle >= 135 && angle < 225) return _colorLeft;
