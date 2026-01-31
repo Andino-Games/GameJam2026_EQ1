@@ -10,15 +10,15 @@ public class BackgroundListener : MonoBehaviour
     [SerializeField] private SpriteRenderer _backgroundSprite;
 
     [Header("Paleta de Colores (Visuales)")]
-    // Configura aquí los colores reales que verán los jugadores
+    // Configuración de oolores
     [SerializeField] private Color _colorBase = Color.gray;   // Color neutro
-    [SerializeField] private Color _visualColorA = new Color(1f, 0.5f, 0.5f); // Ejemplo: Rojo pastel
-    [SerializeField] private Color _visualColorB = new Color(0.5f, 0.5f, 1f); // Ejemplo: Azul pastel
-    [SerializeField] private Color _visualColorC = new Color(0.5f, 1f, 0.5f); // Ejemplo: Verde pastel
+    [SerializeField] private Color _visualColorA = new Color(1f, 0.5f, 0.5f); 
+    [SerializeField] private Color _visualColorB = new Color(0.5f, 0.5f, 1f); 
+    [SerializeField] private Color _visualColorC = new Color(0.5f, 1f, 0.5f); 
 
     private void OnEnable()
     {
-        // Buena práctica: Verificar nulos para evitar errores en consola
+        // Verificar nulos para evitar errores en consola
         if (_colorChannel != null)
         {
             _colorChannel.OnColorChanged += UpdateBackgroundColor;
