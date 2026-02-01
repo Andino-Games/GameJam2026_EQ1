@@ -686,6 +686,10 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 2.5006106
       objectReference: {fileID: 0}
+    - target: {fileID: 850105838411589884, guid: 956e6d94cc0398f4c95a997b95074ad7, type: 3}
+      propertyPath: objectColor
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4184339314914324989, guid: 956e6d94cc0398f4c95a997b95074ad7, type: 3}
       propertyPath: m_Name
       value: DesapearObject
@@ -948,7 +952,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1218,6 +1222,20 @@ PolygonCollider2D:
       - {x: 0.38833335, y: -1.11}
       - {x: 0.42166668, y: -1.1066667}
   m_UseDelaunayMesh: 1
+--- !u!114 &832217873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832217869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711309e545d98f843993879865b1b58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Script.PowerUps.MaskPickup
+  colorCapabilities: {fileID: 11400000, guid: e560793e7b600db4295a7def003dac80, type: 2}
+  colorToUnlock: 2
 --- !u!1001 &881696801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1254,6 +1272,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 72542408c28f5f44eba71df74c3cea6e, type: 3}
+    - target: {fileID: 3333557514240371469, guid: 1ad79c96bd5dc064e89ff0d17db27956, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3333557514240371469, guid: 1ad79c96bd5dc064e89ff0d17db27956, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3333557514240371469, guid: 1ad79c96bd5dc064e89ff0d17db27956, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3698267767306086830, guid: 1ad79c96bd5dc064e89ff0d17db27956, type: 3}
       propertyPath: m_Name
       value: KeySystem
@@ -1313,6 +1343,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2704079850085026892, guid: 1ad79c96bd5dc064e89ff0d17db27956, type: 3}
       insertIndex: -1
       addedObject: {fileID: 832217871}
+    - targetCorrespondingSourceObject: {fileID: 2704079850085026892, guid: 1ad79c96bd5dc064e89ff0d17db27956, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 832217873}
   m_SourcePrefab: {fileID: 100100000, guid: 1ad79c96bd5dc064e89ff0d17db27956, type: 3}
 --- !u!4 &881696802 stripped
 Transform:
@@ -2836,6 +2869,7 @@ GameObject:
   - component: {fileID: 1422045692}
   - component: {fileID: 1422045691}
   - component: {fileID: 1422045690}
+  - component: {fileID: 1422045694}
   m_Layer: 0
   m_Name: MaskKey (1)
   m_TagString: Untagged
@@ -3257,6 +3291,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1422045694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422045688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711309e545d98f843993879865b1b58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Script.PowerUps.MaskPickup
+  colorCapabilities: {fileID: 11400000, guid: e560793e7b600db4295a7def003dac80, type: 2}
+  colorToUnlock: 1
 --- !u!1 &1471274340
 GameObject:
   m_ObjectHideFlags: 0
@@ -3289,7 +3337,6 @@ MonoBehaviour:
   colorChannel: {fileID: 11400000, guid: e70aecad5bb84b248b60fd054d651d0c, type: 2}
   capabilityState: {fileID: 11400000, guid: 9e52f01577917d64c8adbc07958a5359, type: 2}
   revealColor: 3
-  appearObjects: {fileID: 1733681192}
 --- !u!4 &1471274342
 Transform:
   m_ObjectHideFlags: 0
@@ -3421,6 +3468,10 @@ PrefabInstance:
     - target: {fileID: 778312998771529501, guid: 956e6d94cc0398f4c95a997b95074ad7, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 2.5006106
+      objectReference: {fileID: 0}
+    - target: {fileID: 850105838411589884, guid: 956e6d94cc0398f4c95a997b95074ad7, type: 3}
+      propertyPath: objectColor
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4184339314914324989, guid: 956e6d94cc0398f4c95a997b95074ad7, type: 3}
       propertyPath: m_Name
@@ -3824,6 +3875,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1136102962460477841, guid: 39f907dc096f7ab48903179b0b79bff7, type: 3}
+      propertyPath: visualColorB.b
+      value: 0.101960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136102962460477841, guid: 39f907dc096f7ab48903179b0b79bff7, type: 3}
+      propertyPath: visualColorB.g
+      value: 0.44313726
+      objectReference: {fileID: 0}
     - target: {fileID: 2980865653093997197, guid: 39f907dc096f7ab48903179b0b79bff7, type: 3}
       propertyPath: m_Name
       value: ChangeColorSystem
@@ -4023,7 +4082,7 @@ Transform:
   m_GameObject: {fileID: 1743925498}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.5, y: -5.24, z: 0}
+  m_LocalPosition: {x: -6.1, y: -5.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

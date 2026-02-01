@@ -8,7 +8,7 @@ namespace Script.PowerUps.SecretKey
         [SerializeField] private ColorEventChannel colorChannel;
         [SerializeField] private GameCapabilityState capabilityState;
         [SerializeField] private GameColor revealColor = GameColor.ColorC;
-        [SerializeField] private GameObject appearObjects;
+        //[SerializeField] private GameObject appearObjects;
         private Collider2D _collider;
         private Renderer _renderer;
         
@@ -70,11 +70,11 @@ namespace Script.PowerUps.SecretKey
 
         private void UpdateVisuals(bool show)
         {
-            //if (_collider) _collider.enabled = show;
-            //if (_renderer) _renderer.enabled = show;
+            if (_collider) _collider.enabled = show;
+            if (_renderer) _renderer.enabled = show;
 
-            if (appearObjects) gameObject.SetActive(show);
-            
+            //if (appearObjects) gameObject.SetActive(show);
+
         }
     }
 }
