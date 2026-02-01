@@ -42,15 +42,22 @@ namespace Script.Player
         }
 
         private void Jump()
-        {
-            _isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
+        {            
             if (_isGrounded)
             {
                 _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                _isGrounded = false;
             }
         }
 
-   
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if(collision.gameObject.CompareTag("Ground"))
+            {
+                _isGrounded = true;
+            }
+        }
+
         private void OnDrawGizmos()
         {
             if (!groundCheckPoint) return;
