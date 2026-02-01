@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Script.Player
 {
@@ -11,7 +12,7 @@ namespace Script.Player
         [SerializeField] private Collider2D miniplayerCol;
         private Collider2D _playerCol;
 
-        bool _isMiniPress;
+        bool _isMiniPress = false;
 
         private void Awake()
         {
