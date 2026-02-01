@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 using Script.UI; // Importante: Necesario para ver GameColor
 
 namespace Script.PowerUps
