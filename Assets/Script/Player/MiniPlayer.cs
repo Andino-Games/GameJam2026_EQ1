@@ -36,6 +36,14 @@ namespace Script.Player
             _playerCol.enabled = !isPress;
             miniplayerSp.enabled = isPress;
             miniplayerCol.enabled = isPress;
+
+            if (AudioManager.Instance != null)
+            {
+                if (isPress)
+                    AudioManager.Instance.Play("Shrink");  //PILAS CAMBIAR NOMBRE
+                else
+                    AudioManager.Instance.Play("Grow");     //PILAS CAMBIAR NOMBRE
+            }
         }
 
         private void OnEnable() => _controls.Player.Enable();

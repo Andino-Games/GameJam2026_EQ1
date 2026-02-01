@@ -11,6 +11,9 @@ namespace Script.PowerUps.SecretKey
 
         private Collider2D _collider;
         private Renderer _renderer;
+        
+        private bool _isVisible;
+        private bool _initialized;
 
         private void Awake()
         {
@@ -40,8 +43,35 @@ namespace Script.PowerUps.SecretKey
             bool canShow = capabilityState.HasSecretKey && 
                            (colorChannel.CurrentColor == revealColor);
         
-            if (_collider) _collider.enabled = canShow;
-            if (_renderer) _renderer.enabled = canShow;
+            // Inicialización silenciosa (primera vez)
+            if (!_initialized)
+            {
+                _isVisible = canShow;
+                UpdateVisuals(canShow);
+                _initialized = true;
+                return;
+            }
+
+            // Cambio de estado con audio
+            if (canShow != _isVisible)
+            {
+                _isVisible = canShow;
+                UpdateVisuals(canShow);
+
+                if (AudioManager.Instance != null)
+                {
+                    if (canShow)
+                        AudioManager.Instance.Play("PlatformAppear");   //PILAS CAMBIAR NOMBRE
+                    else
+                        AudioManager.Instance.Play("PlatformVanish");    //PILAS CAMBIAR NOMBRE
+                }
+            }
+        }
+
+        private void UpdateVisuals(bool show)
+        {
+            if (_collider) _collider.enabled = show;
+            if (_renderer) _renderer.enabled = show;
         }
     }
 }

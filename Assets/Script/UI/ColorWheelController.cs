@@ -60,6 +60,11 @@ namespace Script.UI
 
             // Opcional: Llevar el mouse al centro
             if (Mouse.current != null) Mouse.current.WarpCursorPosition(screenCenter);
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("WheelOpen");   //PILAS CAMBIAR NOMBRE
+            }
         }
 
         private void OnClickReleased(InputAction.CallbackContext context)
@@ -73,7 +78,18 @@ namespace Script.UI
         
             if (selected != GameColor.None)
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.Play("WheelSelect");    //PILAS CAMBIAR NOMBRE
+                }
                 colorChannel.RaiseColorChanged(selected);
+            }
+            else
+            {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.Play("WheelClose");    //PILAS CAMBIAR NOMBRE
+                }
             }
         }
 
@@ -81,7 +97,10 @@ namespace Script.UI
         {
             _isSelecting = false;
             if (wheelVisuals) wheelVisuals.SetActive(false);
-            colorChannel.RaiseColorChanged(GameColor.None); // Volver a gris
+            
+            // Nota: No agregamos audio aquí porque AudioManager ya reproduce "ColorReset"
+            // automáticamente al detectar GameColor.None
+            colorChannel.RaiseColorChanged(GameColor.None);
         }
 
         private GameColor CalculateColorFromMouse()

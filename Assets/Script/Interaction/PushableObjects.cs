@@ -23,6 +23,13 @@ namespace Script.Interaction
             _interactor = interactor;
             _interactorTransform = (interactor as MonoBehaviour)?.transform;
             _isPushing = true;
+
+            // Audio Events
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("Grab");   //PILAS CAMBIAR NOMBRE
+                AudioManager.Instance.Play("DragLoop");   //PILAS CAMBIAR NOMBRE
+            }
         }
         
         public void OnInteractEnd(IInteractor interactor)
@@ -31,6 +38,13 @@ namespace Script.Interaction
             {
                 _interactor = null;
                 _isPushing = false;
+
+                // Audio Events
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.Stop("DragLoop");    //PILAS CAMBIAR NOMBRE
+                    AudioManager.Instance.Play("Release");     //PILAS CAMBIAR NOMBRE
+                }
             }
         }
         
