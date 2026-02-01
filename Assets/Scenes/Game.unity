@@ -499,37 +499,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 956e6d94cc0398f4c95a997b95074ad7, type: 3}
---- !u!1 &708797560
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 708797561}
-  m_Layer: 0
-  m_Name: Ground
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &708797561
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708797560}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -1.14, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1743925501}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832217869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2704079850085026892, guid: 1ad79c96bd5dc064e89ff0d17db27956, type: 3}
@@ -2224,6 +2193,10 @@ PrefabInstance:
       propertyPath: visualColorC.g
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1691755915305375312, guid: 39f907dc096f7ab48903179b0b79bff7, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2980865653093997197, guid: 39f907dc096f7ab48903179b0b79bff7, type: 3}
       propertyPath: m_Name
       value: ChangeColorSystem
@@ -2419,7 +2392,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 708797561}
   - {fileID: 1577987027}
   - {fileID: 1978765405}
   m_Father: {fileID: 0}
@@ -2484,11 +2456,6 @@ MonoBehaviour:
   jumpForce: 1600
   acceleraton: 10
   decelerator: 10
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  groundCheckPoint: {fileID: 708797561}
-  groundCheckRadius: 0.2
 --- !u!70 &1743925505
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
