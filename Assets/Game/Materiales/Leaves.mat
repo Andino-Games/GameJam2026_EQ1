@@ -2,20 +2,26 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Leaves
   m_Shader: {fileID: 4800000, guid: 1620a93a242e96948a37b528a22a71c7, type: 3}
-  m_ShaderKeywords: _ENABLEUVDISTORT_ON _SHADERSPACE_UV
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ENABLEUVDISTORT_ON
+  - _SHADERSPACE_UV
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -24,7 +30,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 88f9b5c1a5c9906408dc5bedb6a48699, type: 3}
+        m_Texture: {fileID: 2800000, guid: b96573ce5a7a3cb47b6697032de26a37, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -47,6 +53,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - PixelSnap: 0
     - _Brightness: 1
@@ -64,11 +71,18 @@ Material:
     - _ShaderSpace: 0
     - _UVDistortFade: 1
     - _WindFlip: 0
+    - _WindHighQualityNoise: 0
+    - _WindIsParallax: 0
+    - _WindLocalWind: 0
+    - _WindMaxIntensity: 0.5
     - _WindMaxRotation: 2
+    - _WindMinIntensity: -0.5
+    - _WindNoiseScale: 0.1
     - _WindRotation: 0
     - _WindRotationWindFactor: 1
     - _WindSquishFactor: 0.3
     - _WindSquishWindFactor: 0
+    - _WindXPosition: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
@@ -79,3 +93,5 @@ Material:
     - _UVDistortTo: {r: 0.02, g: 0.02, b: 0, a: 0}
     - _UVScalePivot: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _UVScaleScale: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

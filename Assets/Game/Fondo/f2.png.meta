@@ -1,34 +1,31 @@
 fileFormatVersion: 2
-guid: e130b5fdc5b9bdf48bf2cb9396112a92
+guid: 70d99f67a883d1042a437b5e96841acd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8865287750303351163
-    second: jalar (20260131013830)_0
+      213: -951517301633423112
+    second: f2_0
   - first:
-      213: -649022495919779942
-    second: jalar (20260131013830)_1
+      213: -8448020231653924177
+    second: f2_1
   - first:
-      213: 5181150999719668587
-    second: jalar (20260131013830)_2
+      213: -3720592011253979546
+    second: f2_2
   - first:
-      213: -1149990874006886101
-    second: jalar (20260131013830)_3
+      213: -1824835852056544181
+    second: f2_3
   - first:
-      213: 8298065867726355312
-    second: jalar (20260131013830)_4
+      213: 4625762807157520736
+    second: f2_4
   - first:
-      213: 3114686815621400031
-    second: jalar (20260131013830)_5
+      213: 4286058534631581807
+    second: f2_5
   - first:
-      213: 1041151176869839619
-    second: jalar (20260131013830)_6
+      213: -4246875799824248651
+    second: f2_6
   - first:
-      213: -2436009555660859402
-    second: jalar (20260131013830)_7
-  - first:
-      213: -5703482176777360506
-    second: jalar (20260131013830)_8
+      213: 3257559262687254416
+    second: f2_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -61,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 800
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -137,13 +134,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jalar (20260131013830)_0
+      name: f2_0
       rect:
         serializedVersion: 2
-        x: 931
-        y: 1783
-        width: 29
-        height: 109
+        x: 220
+        y: 0
+        width: 217
+        height: 1440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7104741d34d70b70800000000000000
-      internalID: 8865287750303351163
+      spriteID: 8f860863e088bc2f0800000000000000
+      internalID: -951517301633423112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jalar (20260131013830)_1
+      name: f2_1
       rect:
         serializedVersion: 2
-        x: 1011
-        y: 1782
-        width: 155
-        height: 108
+        x: 1337
+        y: 0
+        width: 123
+        height: 1440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a9fc6778a753ef6f0800000000000000
-      internalID: -649022495919779942
+      spriteID: fa264fcdb5a92ca80800000000000000
+      internalID: -8448020231653924177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jalar (20260131013830)_2
+      name: f2_2
       rect:
         serializedVersion: 2
-        x: 1083
-        y: 1780
-        width: 111
-        height: 30
+        x: 2074
+        y: 1096
+        width: 28
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b6b63f1226527e740800000000000000
-      internalID: 5181150999719668587
+      spriteID: 666ec0f374dcd5cc0800000000000000
+      internalID: -3720592011253979546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jalar (20260131013830)_3
+      name: f2_3
       rect:
         serializedVersion: 2
-        x: 432
-        y: 622
-        width: 172
-        height: 332
+        x: 2115
+        y: 0
+        width: 328
+        height: 1440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b29e0eb94696a00f0800000000000000
-      internalID: -1149990874006886101
+      spriteID: b4cb5c00671eca6e0800000000000000
+      internalID: -1824835852056544181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jalar (20260131013830)_4
+      name: f2_4
       rect:
         serializedVersion: 2
-        x: 463
-        y: 165
-        width: 1163
-        height: 1592
+        x: 2071
+        y: 1059
+        width: 42
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07b7f9011f6a82370800000000000000
-      internalID: 8298065867726355312
+      spriteID: 06976d7c3c2023040800000000000000
+      internalID: 4625762807157520736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jalar (20260131013830)_5
+      name: f2_5
       rect:
         serializedVersion: 2
-        x: 1723
-        y: 761
-        width: 20
-        height: 32
+        x: 1799
+        y: 409
+        width: 204
+        height: 497
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,20 +259,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd5c4bf0827993b20800000000000000
-      internalID: 3114686815621400031
+      spriteID: f682f3b57832b7b30800000000000000
+      internalID: 4286058534631581807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jalar (20260131013830)_6
+      name: f2_6
       rect:
         serializedVersion: 2
-        x: 1641
-        y: 619
-        width: 6
-        height: 12
+        x: 1827
+        y: 376
+        width: 130
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +281,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3038ec6aa79e27e00800000000000000
-      internalID: 1041151176869839619
+      spriteID: 5b0d54206f01015c0800000000000000
+      internalID: -4246875799824248651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jalar (20260131013830)_7
+      name: f2_7
       rect:
         serializedVersion: 2
-        x: 1652
-        y: 608
-        width: 15
-        height: 22
+        x: 2335
+        y: 385
+        width: 147
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,30 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6f79065373e813ed0800000000000000
-      internalID: -2436009555660859402
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jalar (20260131013830)_8
-      rect:
-        serializedVersion: 2
-        x: 331
-        y: 516
-        width: 75
-        height: 69
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 68be966bd2929d0b0800000000000000
-      internalID: -5703482176777360506
+      spriteID: 097d14fd3ec253d20800000000000000
+      internalID: 3257559262687254416
       vertices: []
       indices: 
       edges: []
@@ -348,15 +323,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jalar (20260131013830)_0: 8865287750303351163
-      jalar (20260131013830)_1: -649022495919779942
-      jalar (20260131013830)_2: 5181150999719668587
-      jalar (20260131013830)_3: -1149990874006886101
-      jalar (20260131013830)_4: 8298065867726355312
-      jalar (20260131013830)_5: 3114686815621400031
-      jalar (20260131013830)_6: 1041151176869839619
-      jalar (20260131013830)_7: -2436009555660859402
-      jalar (20260131013830)_8: -5703482176777360506
+      f2_0: -951517301633423112
+      f2_1: -8448020231653924177
+      f2_2: -3720592011253979546
+      f2_3: -1824835852056544181
+      f2_4: 4625762807157520736
+      f2_5: 4286058534631581807
+      f2_6: -4246875799824248651
+      f2_7: 3257559262687254416
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

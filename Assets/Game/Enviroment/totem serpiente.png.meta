@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-guid: 88f9b5c1a5c9906408dc5bedb6a48699
-AssetOrigin:
-  serializedVersion: 1
-  productId: 194842
-  packageName: Interactive Wind 2D - Grass and Tree Shader
-  packageVersion: 3.4
-  assetPath: Assets/Interactive Wind 2D/Demo/Sprites/Sprites/Leaf.png
-  uploadId: 799678
+guid: 1cbe70a43f48515488c14e1f38e24e1e
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2409793724265297349
+    second: totem serpiente_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,9 +66,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -115,12 +111,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: totem serpiente_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 3000
+        height: 3000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c57cc4ef9e417120800000000000000
+      internalID: 2409793724265297349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -129,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      totem serpiente_0: 2409793724265297349
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
