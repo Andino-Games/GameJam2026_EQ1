@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
-using Script.UI; // Para ver los Event Channels
-using Script.PowerUps.SecretKey; // Para ver la Llave
+using UnityEngine.SceneManagement; 
+using Script.UI;
+using Script.PowerUps.SecretKey;
 
 public class AudioManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioMixerGroup _sfxGroup;
 
     [Header("Librería de Sonidos")]
-    public Sound[] sounds; 
+    public Sound[] sounds;
 
     [Header("Conexión con Eventos (Opcional)")]
     [SerializeField] private ColorEventChannel _colorChannel;
@@ -21,7 +22,6 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton Pattern
         if (Instance == null)
         {
             Instance = this;
@@ -33,7 +33,6 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // Generar AudioSources automáticamente
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -42,7 +41,6 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
 
-            // Asignar grupo del Mixer (Si no tiene uno específico en el Sound, usa los generales)
             if (s.outputGroup != null) 
                 s.source.outputAudioMixerGroup = s.outputGroup;
             else
@@ -52,38 +50,42 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // Suscripción automática a eventos del juego
         if (_colorChannel != null) _colorChannel.OnColorChanged += OnColorChangedAudio;
         if (_capabilityState != null) _capabilityState.OnKeyAcquired += OnKeyAcquiredAudio;
+        
+        // Suscribirse al evento de cambio de escena
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         if (_colorChannel != null) _colorChannel.OnColorChanged -= OnColorChangedAudio;
         if (_capabilityState != null) _capabilityState.OnKeyAcquired -= OnKeyAcquiredAudio;
+
+        
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void Start()
+    // Este método se llamará cada vez que una escena nueva termine de cargar
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Ejemplo: Iniciar música de fondo
-        Play("BGM_Main");   //PILAS COLOCAR NOMBRE
+        
+        Play("BGM_Main");
     }
 
-    // --- REACCIONES AUTOMÁTICAS ---
     private void OnColorChangedAudio(GameColor newColor)
     {
         if (newColor != GameColor.None)
-            Play("ColorChange"); //PILAS COLOCAR NOMBRE
+            Play("ColorChange");
         else
-            Play("ColorReset");  //PILAS COLOCAR NOMBRE
+            Play("ColorReset");
     }
 
     private void OnKeyAcquiredAudio()
     {
-        Play("KeyPickup");   //PILAS COLOCAR NOMBRE
+        Play("KeyPickup");
     }
 
-    // --- SISTEMA LIBRE POR STRINGS ---
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
