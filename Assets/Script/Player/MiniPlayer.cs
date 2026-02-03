@@ -10,16 +10,15 @@ namespace Script.Player
         private PlayerControls _controls;
 
         private SpriteRenderer _player;
-        [SerializeField] private SpriteRenderer miniplayerSp;
+        public SpriteRenderer miniplayerSp;
         [SerializeField] private Collider2D miniplayerCol;
         private Collider2D _playerCol;
         [SerializeField] private ColorEventChannel _colorEventChannel;
         [SerializeField] private GameCapabilityState _gameCapabilityState;
         [SerializeField] private GameColor revealColor = GameColor.ColorC;
-        private bool _initialized = false;
-
-
-        bool _isMiniPress = false;
+        
+        public bool _isMiniPress = false;
+        [SerializeField] public Animator miniplayerAnim;
 
         private void OnEnable()
         {
@@ -47,17 +46,17 @@ namespace Script.Player
         {
             bool canShow = _gameCapabilityState.HasSecretKey &&
                           (_colorEventChannel.CurrentColor == revealColor);
-           
+
+            _isMiniPress = canShow;
             LittlePlayer(canShow);
             return;
             
             
-        }
-   
+        }  
 
         private void LittlePlayer(bool isPress)
         {
-            _player.enabled = !isPress;
+             _player.enabled = !isPress;
             _playerCol.enabled = !isPress;
             miniplayerSp.enabled = isPress;
             miniplayerCol.enabled = isPress;
