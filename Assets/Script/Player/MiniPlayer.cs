@@ -2,13 +2,13 @@ using Script.PowerUps.SecretKey;
 using Script.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 namespace Script.Player
 {
     public class MiniPlayer : MonoBehaviour
     {
         private PlayerControls _controls;
-
         private SpriteRenderer _player;
         public SpriteRenderer miniplayerSp;
         [SerializeField] private Collider2D miniplayerCol;
@@ -16,9 +16,14 @@ namespace Script.Player
         [SerializeField] private ColorEventChannel _colorEventChannel;
         [SerializeField] private GameCapabilityState _gameCapabilityState;
         [SerializeField] private GameColor revealColor = GameColor.ColorC;
-        
         public bool _isMiniPress = false;
         [SerializeField] public Animator miniplayerAnim;
+        PlayerMovement player;
+
+        public void Start()
+        {
+            player = GetComponent<PlayerMovement>();
+        }
 
         private void OnEnable()
         {
@@ -56,6 +61,7 @@ namespace Script.Player
 
         private void LittlePlayer(bool isPress)
         {
+            player.jumpForce = 300f;
              _player.enabled = !isPress;
             _playerCol.enabled = !isPress;
             miniplayerSp.enabled = isPress;

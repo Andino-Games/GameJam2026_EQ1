@@ -6,7 +6,8 @@ public class ChangeLevel : MonoBehaviour
 {
     [SerializeField] private Transform playerPosition;
     [SerializeField] private ScreenFader screenFader;
-
+    [SerializeField] private GameObject finalImage;
+    public bool final;
     private GameObject player;
     
 
@@ -16,6 +17,7 @@ public class ChangeLevel : MonoBehaviour
         if (screenFader)
         {
             screenFader.gameObject.SetActive(false);
+
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,8 +25,7 @@ public class ChangeLevel : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(Fader());
-            
-            
+                    
         }
     }
     private IEnumerator Fader()
@@ -38,7 +39,15 @@ public class ChangeLevel : MonoBehaviour
         if (screenFader) yield return screenFader.FadeOut();
         else yield return new WaitForSeconds(0.5f);
 
-        player.transform.position = playerPosition.position;
+        if (!final)
+        {
+            player.transform.position = playerPosition.position;
+
+        }
+        else
+        {
+            finalImage.SetActive(true);
+        }
         // 6. Audio de Respawn
         //if (AudioManager.Instance != null) AudioManager.Instance.Play("PlayerRespawn");
 
