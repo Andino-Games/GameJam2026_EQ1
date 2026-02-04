@@ -2146,7 +2146,13 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3248886511476736796, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 1963404337142281521, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 5745021079110977699, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 8270711357993997393, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 6227312226650907963, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 26720946714565623, guid: 45e0f06c750176947862c10346226439, type: 3}
     m_RemovedGameObjects:
     - {fileID: 82410586530807885, guid: 45e0f06c750176947862c10346226439, type: 3}
     m_AddedGameObjects: []
@@ -3324,14 +3330,16 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3248886511476736796, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 1963404337142281521, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 5745021079110977699, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 6227312226650907963, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 26720946714565623, guid: 45e0f06c750176947862c10346226439, type: 3}
     m_RemovedGameObjects:
     - {fileID: 82410586530807885, guid: 45e0f06c750176947862c10346226439, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5607819269926399345, guid: 45e0f06c750176947862c10346226439, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1239661885}
     - targetCorrespondingSourceObject: {fileID: 5607819269926399345, guid: 45e0f06c750176947862c10346226439, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1239661884}
@@ -5432,43 +5440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeLevel
   playerPosition: {fileID: 1383741429}
---- !u!70 &1239661885
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239661883}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.0000004498464, y: 0.015105392}
-  m_Size: {x: 1.4596571, y: 1.8498088}
-  m_Direction: 0
+  screenFader: {fileID: 1023301006}
 --- !u!4 &1239661886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5516487406859467972, guid: 45e0f06c750176947862c10346226439, type: 3}
@@ -6209,7 +6181,13 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.6117647
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 26720946714565623, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 6227312226650907963, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 8270711357993997393, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 5745021079110977699, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 1963404337142281521, guid: 45e0f06c750176947862c10346226439, type: 3}
+    - {fileID: 3248886511476736796, guid: 45e0f06c750176947862c10346226439, type: 3}
     m_RemovedGameObjects:
     - {fileID: 82410586530807885, guid: 45e0f06c750176947862c10346226439, type: 3}
     m_AddedGameObjects: []
@@ -6276,6 +6254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeLevel
   playerPosition: {fileID: 1511049331}
+  screenFader: {fileID: 1023301006}
 --- !u!4 &1400391606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5516487406859467972, guid: 45e0f06c750176947862c10346226439, type: 3}
@@ -9244,6 +9223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeLevel
   playerPosition: {fileID: 1511049331}
+  screenFader: {fileID: 0}
 --- !u!70 &2000146852
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
