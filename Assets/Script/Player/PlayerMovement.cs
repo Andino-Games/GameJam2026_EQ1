@@ -17,6 +17,7 @@ namespace Script.Player
         [SerializeField] private Transform groundCheck; // Un objeto vac�o en los pies del jugador
         [SerializeField] private float groundCheckRadius = 0.2f;
         [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private SpriteRenderer mask;
         private PlayerPush _pushScript;
         SpriteRenderer sp;
         Animator anim;
@@ -88,7 +89,7 @@ namespace Script.Player
                     bool lookLeft = _moveInput.x < 0;
 
                     sp.flipX = lookLeft;
-
+                    mask.flipX = lookLeft;
                     if (_miniPlayer.miniplayerSp != null)
                         _miniPlayer.miniplayerSp.flipX = lookLeft;
                 }
