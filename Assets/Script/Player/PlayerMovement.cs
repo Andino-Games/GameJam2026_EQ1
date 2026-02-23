@@ -14,13 +14,24 @@ namespace Script.Player
         [SerializeField] public float jumpForce;
         [SerializeField] private float acceleraton = 10f;
         [SerializeField] private float decelerator = 10f;
-        [SerializeField] private Transform groundCheck; // Un objeto vacío en los pies del jugador
+        [SerializeField] private Transform groundCheck; // Un objeto vacï¿½o en los pies del jugador
         [SerializeField] private float groundCheckRadius = 0.2f;
         [SerializeField] private LayerMask groundLayer;
         private PlayerPush _pushScript;
         SpriteRenderer sp;
         Animator anim;
         private bool _isGrounded;
+        private bool _canMove = true;
+
+        public void DisableMovement()
+        {
+            _canMove = false;
+        }
+        
+        public void EnableMovement()
+        {
+            _canMove = true;
+        }
 
         private void Awake()
         {
@@ -34,6 +45,8 @@ namespace Script.Player
 
         private void FixedUpdate()
         {
+            if (!_canMove) return;
+            
             _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
              anim.SetBool("Jump", !_isGrounded);
@@ -72,8 +85,8 @@ namespace Script.Player
                     if (_miniPlayer.miniplayerSp != null)
                         _miniPlayer.miniplayerSp.flipX = lookLeft;
                 }
-                // Si IsCurrentlyPushing es true, el código del flip se ignora 
-                // y el personaje mantiene la dirección que tenía al empezar el agarre.
+                // Si IsCurrentlyPushing es true, el cï¿½digo del flip se ignora 
+                // y el personaje mantiene la direcciï¿½n que tenï¿½a al empezar el agarre.
             }
         }
 

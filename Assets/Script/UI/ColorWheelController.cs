@@ -22,6 +22,17 @@ namespace Script.UI
 
         private GameControls _controls;
         private bool _isSelecting;
+        private bool _enabled;
+
+        public void Disable()
+        {
+            _enabled = false;
+        }
+        
+        public void Enable()
+        {
+            _enabled = true;
+        }
 
         private void Awake()
         {
@@ -52,6 +63,8 @@ namespace Script.UI
 
         private void OnClickStarted(InputAction.CallbackContext context)
         {
+            if (!_enabled) return;
+            
             _isSelecting = true;
         
             // Centrar en pantalla
@@ -70,6 +83,8 @@ namespace Script.UI
 
         private void OnClickReleased(InputAction.CallbackContext context)
         {
+            if (!_enabled) return;
+            
             if (!_isSelecting) return;
 
             _isSelecting = false;
@@ -93,6 +108,8 @@ namespace Script.UI
 
         private void OnDoubleClick(InputAction.CallbackContext context)
         {
+            if (!_enabled) return;
+            
             _isSelecting = false;
             if (wheelVisuals) wheelVisuals.SetActive(false);
             colorChannel.RaiseColorChanged(GameColor.None);
