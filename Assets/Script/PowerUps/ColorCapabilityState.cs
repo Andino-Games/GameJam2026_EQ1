@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-using Script.UI; // Importante: Necesario para ver GameColor
+using Script.UI;
+using UnityEngine.UI; // Importante: Necesario para ver GameColor
 
 namespace Script.PowerUps
 {
@@ -12,7 +13,6 @@ namespace Script.PowerUps
         public Sprite spriteB;
         public Sprite spriteC;
         public Sprite spriteDefault;
-        
         // Estado de desbloqueo (Solo memoria RAM, se reinicia al cerrar el juego)
         public bool IsColorAUnlocked { get; private set; }
         public bool IsColorBUnlocked { get; private set; }
@@ -25,12 +25,17 @@ namespace Script.PowerUps
             {
                 case GameColor.ColorA:
                     IsColorAUnlocked = true;
+                   
                     break;
                 case GameColor.ColorB:
                     IsColorBUnlocked = true;
+                    
+                    
                     break;
                 case GameColor.ColorC:
                     IsColorCUnlocked = true;
+                   
+                    
                     break;
             }
         }
