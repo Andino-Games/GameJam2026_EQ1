@@ -17,10 +17,25 @@ namespace Script.Player
         [SerializeField] private Transform groundCheck; // Un objeto vac�o en los pies del jugador
         [SerializeField] private float groundCheckRadius = 0.2f;
         [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private SpriteRenderer mask;
         private PlayerPush _pushScript;
         SpriteRenderer sp;
         Animator anim;
         private bool _isGrounded;
+        
+        private float _coyoteTimeCounter;
+        [SerializeField] private float coyoteTime = 0.2f;
+        private void OnEnable()
+        {
+            _controls.Player.Enable();
+            // Suscribimos el salto al evento 'performed' (se dispara una vez al presionar)
+            _controls.Player.Jump.performed += ctx => Jump(); 
+        }
+        private void OnDisable()
+        {
+            _controls.Player.Jump.performed -= ctx => Jump();
+            _controls.Player.Disable();
+        }
         private bool _canMove = true;
 
         public void DisableMovement()
@@ -48,10 +63,16 @@ namespace Script.Player
             if (!_canMove) return;
             
             _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-             anim.SetBool("Jump", !_isGrounded);
+            if (_isGrounded) {
+                _coyoteTimeCounter = coyoteTime;
+            } else {
+                _coyoteTimeCounter -= Time.fixedDeltaTime;
+            }
+            anim.SetBool("Jump", !_isGrounded);
             if (_miniPlayer.miniplayerAnim != null)
                 _miniPlayer.miniplayerAnim.SetBool("Jump", !_isGrounded);
+
+            _moveInput = _controls.Player.Move.ReadValue<Vector2>();
 
             _moveInput = _controls.Player.Move.ReadValue<Vector2>();
             float targetSpeed = _moveInput.x * speed;
@@ -62,7 +83,7 @@ namespace Script.Player
             float newVelocity = Mathf.Lerp(_rb.linearVelocity.x, targetSpeed, learp * Time.fixedDeltaTime);
             _rb.linearVelocity = new Vector2(newVelocity, _rb.linearVelocity.y);
 
-            if (_moveInput.y > 0.5f) Jump();
+            
         }
 
         private void HandleVisuals()
@@ -81,7 +102,7 @@ namespace Script.Player
                     bool lookLeft = _moveInput.x < 0;
 
                     sp.flipX = lookLeft;
-
+                    mask.flipX = lookLeft;
                     if (_miniPlayer.miniplayerSp != null)
                         _miniPlayer.miniplayerSp.flipX = lookLeft;
                 }
@@ -92,15 +113,14 @@ namespace Script.Player
 
         private void Jump()
         {
-            if (_isGrounded)
+            if (_coyoteTimeCounter > 0f)
             {
                 _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
+                _coyoteTimeCounter = 0f; // Evita saltar en el aire tras el primer salto
             }
         }
 
         
-        private void OnEnable() => _controls.Player.Enable();
-        private void OnDisable() => _controls.Player.Disable();
+        
     }
 }

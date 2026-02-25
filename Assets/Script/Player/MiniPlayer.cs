@@ -16,15 +16,10 @@ namespace Script.Player
         [SerializeField] private ColorEventChannel _colorEventChannel;
         [SerializeField] private GameCapabilityState _gameCapabilityState;
         [SerializeField] private GameColor revealColor = GameColor.ColorC;
-        public bool _isMiniPress = false;
         [SerializeField] public Animator miniplayerAnim;
-        PlayerMovement player;
+        
 
-        public void Start()
-        {
-            player = GetComponent<PlayerMovement>();
-        }
-
+        
         private void OnEnable()
         {
             if (_colorEventChannel) _colorEventChannel.OnColorChanged += OnStateChanged;
@@ -52,27 +47,17 @@ namespace Script.Player
             bool canShow = _gameCapabilityState.HasSecretKey &&
                           (_colorEventChannel.CurrentColor == revealColor);
 
-            _isMiniPress = canShow;
-            if(canShow)
-            {
-                LittlePlayer(canShow, 300f);
-                return;
-            }
-            else
-            {
-                
-                LittlePlayer(canShow,1600f);
-                
-                
-            }
+            LittlePlayer(canShow);
+            return;
+            
+            
             
             
         }  
 
-        private void LittlePlayer(bool isPress, float mass)
+        private void LittlePlayer(bool isPress)
         {
-            player.jumpForce = mass;
-             _player.enabled = !isPress;
+           _player.enabled = !isPress;
             _playerCol.enabled = !isPress;
             miniplayerSp.enabled = isPress;
             miniplayerCol.enabled = isPress;

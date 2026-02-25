@@ -14,6 +14,7 @@ namespace Script.UI
 
         [Header("UI Visuals")]
         [SerializeField] private GameObject wheelVisuals; // La rueda completa (un solo objeto)
+        [SerializeField] private SpriteRenderer playerMask;
 
         [Header("Configuración de Colores (Lógica)")]
         [SerializeField] private GameColor colorTop = GameColor.ColorA;
@@ -43,6 +44,7 @@ namespace Script.UI
 
             _controls = new GameControls();
             if (wheelVisuals) wheelVisuals.SetActive(false);
+            if (playerMask && colorState) colorState.UpdateSprite(playerMask, GameColor.None);
         }
 
         private void OnEnable()
@@ -98,6 +100,8 @@ namespace Script.UI
             {
                 if (AudioManager.Instance != null) AudioManager.Instance.Play("WheelSelect");
                 colorChannel.RaiseColorChanged(selected);
+                colorState.UpdateSprite(playerMask, selected);
+                
             }
             else
             {
@@ -113,6 +117,7 @@ namespace Script.UI
             _isSelecting = false;
             if (wheelVisuals) wheelVisuals.SetActive(false);
             colorChannel.RaiseColorChanged(GameColor.None);
+            colorState.UpdateSprite(playerMask, GameColor.None);
         }
 
         private GameColor CalculateColorFromMouse()

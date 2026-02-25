@@ -1,4 +1,5 @@
 ﻿using Script.Interaction.Abstractions;
+using Script.PowerUps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Script.UI;
@@ -13,11 +14,13 @@ namespace Script.Player
         [SerializeField] private LayerMask grabLayerMask;
         [SerializeField] private ColorEventChannel colorChannel;
         [SerializeField] private GameCapabilityState capabilityState;
-        [SerializeField] private GameColor revealColor = GameColor.ColorC;
+        [SerializeField] private ColorCapabilityState colorData;
+        [SerializeField] private GameColor revealColor = GameColor.ColorB;
         [SerializeField] private Animator anim;
         private IStayInteractable _pushable;
-        private Transform _pushedObjectTransform; // Para guardar la referencia del transform
+        [SerializeField] Transform _pushedObjectTransform; // Para guardar la referencia del transform
         private bool _isCurrentlyPushing = false;
+        
         public bool IsCurrentlyPushing
         {
             get { return _isCurrentlyPushing; }
@@ -76,6 +79,7 @@ namespace Script.Player
                 _isCurrentlyPushing = true;
                 anim.SetBool("Grab", true);
                 _pushable.OnInteractStart(this);
+                Debug.Log("Empezar agarre");
                 
             }
         }
