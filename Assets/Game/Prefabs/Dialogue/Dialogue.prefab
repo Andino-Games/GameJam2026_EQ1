@@ -471,8 +471,8 @@ MonoBehaviour:
   focusCheckFrequency: 0.2
   refreshSelectablesFrequency: 0
   selectPreviousOnDisable: 1
-  showAnimationTrigger: OpenPanel
-  hideAnimationTrigger: ClosePanel
+  showAnimationTrigger: Open
+  hideAnimationTrigger: Close
   startState: 0
   waitForShowAnimationToSetOpen: 0
   m_deactivateOnHidden: 1

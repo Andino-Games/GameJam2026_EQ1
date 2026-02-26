@@ -772,7 +772,7 @@ MonoBehaviour:
     waitForHideAnimation: 0
     allowForceImmediate: 0
   conversationUIElements:
-    mainPanel: {fileID: 0}
+    mainPanel: {fileID: 6600833602355813265}
     dontDeactivateMainPanel: 0
     waitForMainPanelOpen: 0
     subtitlePanels:
