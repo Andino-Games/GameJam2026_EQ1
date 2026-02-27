@@ -670,7 +670,7 @@ TilemapRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 1.5, y: 1.5, z: 0}
+  m_ChunkCullingBounds: {x: 3.5, y: 3.5, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -1032,7 +1032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.03885352, y: 0.43112695}
   m_AnchorMax: {x: 0.43499255, y: 0.5631152}
-  m_AnchoredPosition: {x: -19.32, y: 0}
+  m_AnchoredPosition: {x: -19.320007, y: -69}
   m_SizeDelta: {x: -38.64, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &966847650
@@ -2143,7 +2143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1547452176
 RectTransform:
   m_ObjectHideFlags: 0

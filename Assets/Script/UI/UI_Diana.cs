@@ -5,6 +5,7 @@ public class UI_Diana : MonoBehaviour
 {
     public void ExitGame()
     {
-        Application.Quit();
+        // Application.Quit();
+        SceneManager.LoadScene("Menu");
     }
 }

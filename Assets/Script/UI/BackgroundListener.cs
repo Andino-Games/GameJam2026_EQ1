@@ -45,8 +45,8 @@ namespace Script.UI
                 _ => colorBase
             };
 
-            if (backgroundSprite.Length !=null)
-            {
+            // if (backgroundSprite.Length !=null)
+            // {
                 foreach (SpriteRenderer sprite in backgroundSprite)
                 {
                     sprite.color = targetColor;
@@ -57,7 +57,7 @@ namespace Script.UI
                     }
                     
                 }
-            }
+            // }
         }
     }
 }
