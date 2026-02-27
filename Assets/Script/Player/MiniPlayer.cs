@@ -2,25 +2,24 @@ using Script.PowerUps.SecretKey;
 using Script.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 namespace Script.Player
 {
     public class MiniPlayer : MonoBehaviour
     {
         private PlayerControls _controls;
-
         private SpriteRenderer _player;
-        [SerializeField] private SpriteRenderer miniplayerSp;
+        public SpriteRenderer miniplayerSp;
         [SerializeField] private Collider2D miniplayerCol;
         private Collider2D _playerCol;
         [SerializeField] private ColorEventChannel _colorEventChannel;
         [SerializeField] private GameCapabilityState _gameCapabilityState;
         [SerializeField] private GameColor revealColor = GameColor.ColorC;
-        private bool _initialized = false;
+        [SerializeField] public Animator miniplayerAnim;
+        
 
-
-        bool _isMiniPress = false;
-
+        
         private void OnEnable()
         {
             if (_colorEventChannel) _colorEventChannel.OnColorChanged += OnStateChanged;
@@ -47,17 +46,18 @@ namespace Script.Player
         {
             bool canShow = _gameCapabilityState.HasSecretKey &&
                           (_colorEventChannel.CurrentColor == revealColor);
-           
+
             LittlePlayer(canShow);
             return;
             
             
-        }
-   
+            
+            
+        }  
 
         private void LittlePlayer(bool isPress)
         {
-            _player.enabled = !isPress;
+           _player.enabled = !isPress;
             _playerCol.enabled = !isPress;
             miniplayerSp.enabled = isPress;
             miniplayerCol.enabled = isPress;

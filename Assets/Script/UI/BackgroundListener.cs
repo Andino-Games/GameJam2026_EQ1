@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Script.UI
 {
@@ -9,7 +10,8 @@ namespace Script.UI
         [SerializeField] private ColorEventChannel colorChannel;
     
         [Tooltip("El componente SpriteRenderer de tu fondo")]
-        [SerializeField] private SpriteRenderer backgroundSprite;
+        [SerializeField] private SpriteRenderer[] backgroundSprite;
+        [SerializeField] private Tilemap[] tilemap;
 
         [Header("Paleta de Colores (Visuales)")]
         [SerializeField] private Color colorBase = Color.gray;
@@ -43,9 +45,18 @@ namespace Script.UI
                 _ => colorBase
             };
 
-            if (backgroundSprite)
+            if (backgroundSprite.Length !=null)
             {
-                backgroundSprite.color = targetColor;
+                foreach (SpriteRenderer sprite in backgroundSprite)
+                {
+                    sprite.color = targetColor;
+                    foreach (Tilemap tile in tilemap)
+                    {
+                        tile.color = targetColor;
+                        
+                    }
+                    
+                }
             }
         }
     }

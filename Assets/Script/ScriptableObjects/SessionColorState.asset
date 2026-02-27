@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8407fd97f3b21b4fba6329af74f7a1f, type: 3}
   m_Name: SessionColorState
   m_EditorClassIdentifier: Assembly-CSharp::Script.PowerUps.ColorCapabilityState
+  spriteA: {fileID: 21300000, guid: 59bc5cd3535dae549aec3c937a0d05c3, type: 3}
+  spriteB: {fileID: 21300000, guid: 608f95a723e621f43a50a48e1fbd0b84, type: 3}
+  spriteC: {fileID: 21300000, guid: a560ef68da9bf9e49baf44938302a910, type: 3}
+  spriteDefault: {fileID: 0}

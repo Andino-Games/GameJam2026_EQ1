@@ -1,63 +1,119 @@
 ﻿using Script.Interaction.Abstractions;
+using Script.PowerUps;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Script.UI;
+using Script.PowerUps.SecretKey;
+
 
 namespace Script.Player
 {
     public class PlayerPush : MonoBehaviour, IInteractor
     {
         [SerializeField] private float grabDistance = 1f;
-        private PlayerControls _playerInput;
         [SerializeField] private LayerMask grabLayerMask;
-        
-        private bool _isPushing;
+        [SerializeField] private ColorEventChannel colorChannel;
+        [SerializeField] private GameCapabilityState capabilityState;
+        [SerializeField] private ColorCapabilityState colorData;
+        [SerializeField] private GameColor revealColor = GameColor.ColorB;
+        [SerializeField] private Animator anim;
         private IStayInteractable _pushable;
+        [SerializeField] Transform _pushedObjectTransform; // Para guardar la referencia del transform
+        private bool _isCurrentlyPushing = false;
         
-        private void Awake()
+        public bool IsCurrentlyPushing
         {
-            _playerInput = new PlayerControls();
+            get { return _isCurrentlyPushing; }
         }
 
         private void OnEnable()
         {
-            _playerInput.Player.Enable();
-            _playerInput.Player.Grab.performed += OnGrabPerformed;
+            if (colorChannel) colorChannel.OnColorChanged += OnStateChanged;
+            if (capabilityState) capabilityState.OnKeyAcquired += OnSecretUnlocked;
         }
 
         private void OnDisable()
         {
-            _playerInput.Player.Grab.performed -= OnGrabPerformed;
-            _playerInput.Player.Disable();
+            if (colorChannel) colorChannel.OnColorChanged -= OnStateChanged;
+            if (capabilityState) capabilityState.OnKeyAcquired -= OnSecretUnlocked;
         }
 
-        private void OnGrabPerformed(InputAction.CallbackContext obj)
+        private void Update()
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, grabDistance, grabLayerMask);
-            if (!hit.collider) return;
-            var isPushable = hit.collider.TryGetComponent(out _pushable);
-            if (!isPushable) return;
-            
-            if (!_isPushing)
+            CheckPushState();
+
+            if (_isCurrentlyPushing && _pushedObjectTransform != null)
             {
-                _pushable?.OnInteractStart(this);
-                _isPushing = true;
+                UpdateBlockPosition();
             }
-            else if (_isPushing)
-            {
-                _pushable?.OnInteractEnd(this);
-                _isPushing = false;
-            }
-            
         }
 
-        #region Debug
+        private void OnStateChanged(GameColor color) => CheckPushState();
+        private void OnSecretUnlocked() => CheckPushState();
+
+        private void CheckPushState()
+        {
+            // Condiciones para poder empujar
+            bool conditionsMet = capabilityState.HasSecretKey && (colorChannel.CurrentColor == revealColor);
+
+            if (conditionsMet && !_isCurrentlyPushing)
+            {
+                TryStartPush();
+               
+            }
+            else if (!conditionsMet && _isCurrentlyPushing)
+            {
+                StopPush();
+            }
+        }
+
+        private void TryStartPush()
+        {
+            // Raycast hacia donde mira el jugador
+            Vector2 direction = Vector2.right * transform.localScale.x;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, grabDistance, grabLayerMask);
+
+            if (hit.collider != null && hit.collider.TryGetComponent(out _pushable))
+            {
+                _pushedObjectTransform = hit.collider.transform;
+                _isCurrentlyPushing = true;
+                anim.SetBool("Grab", true);
+                _pushable.OnInteractStart(this);
+                Debug.Log("Empezar agarre");
+                
+            }
+        }
+
+        private void StopPush()
+        {
+            if (_pushable != null)
+            {
+                anim.SetBool("Grab", false);
+
+                _pushable.OnInteractEnd(this);
+            }
+            _pushable = null;
+            _pushedObjectTransform = null;
+            _isCurrentlyPushing = false;
+           
+        }
+
+        private void UpdateBlockPosition()
+        {
+            // Calculamos la posición objetivo (enfrente del jugador)
+            Vector3 targetPos = transform.position + (Vector3.right * transform.localScale.x * grabDistance);
+
+            // Mantenemos la Y original del bloque para que no "vuele" si no quieres
+            targetPos.y = _pushedObjectTransform.position.y;
+
+            // Movimiento suave o directo
+            _pushedObjectTransform.position = targetPos;
+        }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.right * transform.localScale.x * grabDistance);
+            Gizmos.DrawLine(transform.position, transform.position + (Vector3.right * transform.localScale.x * grabDistance));
         }
-
-        #endregion
     }
 }
